@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Images</title>
+  </head>
+  <body>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="upload.html">Upload Images</a>
+    </nav>
+
+    <h1>Upload Images</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <label for="images">Select Images:</label>
+      <input type="file" name="images" multiple required>
+      <label for="description">Description:</label>
+      <textarea name="description" rows="4" cols="50"></textarea>
+      <button type="submit">Upload</button>
+    </form>
+
+  </body>
+</html>

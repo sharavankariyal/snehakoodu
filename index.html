@@ -1,0 +1,607 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snehakkoodu Charitable Trust</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;700&display=swap">
+    <style>
+        :root {
+            --primary-color: #27408B;
+            --secondary-color: #FFFFFF;
+            --text-color: #333333;
+            --bg-color: linear-gradient(to bottom right, #f0f4f8, #d9e2ec);
+            --button-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            --container-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --card-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            --img-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            --menu-transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+            padding-top: 80px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #27408B, #4682B4);
+            color: white;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            top: 0;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .registration-number {
+            font-size: 0.8rem;
+            font-weight: 500; 
+            color: var(--secondary-color);
+            margin-top: 5px;
+        }
+
+        .hamburger {
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border: none;
+            background: none;
+        }
+
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            background-color: white;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            top: 60px;
+            right: 10px;
+            z-index: 1001;
+            padding: 1rem;
+            border-radius: 5px;
+            transition: var(--menu-transition);
+            transform: scaleY(0);
+            transform-origin: top;
+        }
+
+        .hamburger-menu.active {
+            display: flex;
+            transform: scaleY(1);
+        }
+
+        .hamburger-menu .button {
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 50px;
+            margin-top: 5px;
+            font-weight: 600;
+            display: block;
+            box-shadow: var(--button-shadow);
+            transition: var(--menu-transition);
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+        }
+
+        .hamburger-menu .button:hover {
+            background: #1E3A8A;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-banner {
+            background: linear-gradient(90deg, #2193b0, #6dd5ed);
+            padding: 1rem 0;
+            text-align: center;
+            font-size: 1rem;
+            color: white;
+            width: 100%;
+            z-index: 999;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 80px;
+            overflow: hidden;
+        }
+
+        .info-banner span {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 29s linear infinite;
+            animation-delay: -10s;
+        }
+
+        .info-banner span:before {
+            content: "\f095";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            margin-right: 10px;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            padding-top: 200px;
+            border-radius: 10px;
+        }
+
+        .slideshow-container {
+            width: 100%;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: var(--button-shadow);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            height: 300px;
+        }
+
+        .slides {
+            display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .info-card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-card p {
+            font-family: 'Noto Sans Malayalam', sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .button {
+            display: block;
+            margin: 1rem auto;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: var(--menu-transition);
+            font-weight: 600;
+            box-shadow: var(--button-shadow);
+        }
+
+        .button i {
+            margin-right: 0.5rem;
+        }
+
+        .button:hover {
+            background: #1E3A8A;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .content {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .content-card {
+            background: linear-gradient(135deg, #e3e7f1, #cfd8e7);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .content-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .single-line-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            margin: 15px;
+            padding: 30px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .single-line-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            box-shadow: var(--img-shadow);
+        }
+
+        .qr-code {
+            margin: 1rem auto;
+            display: block;
+        }
+
+        .images-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 2rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .images-section img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: var(--img-shadow);
+            transition: transform 0.3s ease;
+            max-width: 100%;
+        }
+
+        .images-section img:hover {
+            transform: scale(1.03);
+        }
+
+        .wave {
+            position: relative;
+            width: 100%;
+            height: 150px;
+            background: transparent;
+            overflow: hidden;
+        }
+
+        .wave svg {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            fill: #27408B;
+            width: 100%;
+            height: auto;
+        }
+
+        footer {
+            background: #27408B;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            font-size: 1rem;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .slideshow-container {
+                height: 225px;
+            }
+
+            .info-banner span {
+                font-size: 0.9rem;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .registration-number {
+                font-size: 0.7rem;
+            }
+
+            .logo {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .button {
+                padding: 0.6rem 1rem;
+            }
+        }
+    </style>
+     <style>
+        .gallery {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+        .gallery img {
+          width: 200px;
+          height: 150px;
+          object-fit: cover;
+        }
+      </style>
+    </head>
+    <body>
+  
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="upload.html">Upload Images</a>
+      </nav>
+  
+      <h1>Image Gallery</h1>
+      <div class="gallery" id="imageGallery"></div>
+  
+      <script>
+        async function loadUploadedImages() {
+          const response = await fetch('/get-uploads');
+          const data = await response.json();
+          const imageGallery = document.getElementById('imageGallery');
+          
+          data.images.forEach(image => {
+            const imgElement = document.createElement('img');
+            imgElement.src = image.url;
+            imageGallery.appendChild(imgElement);
+          });
+        }
+  
+        window.onload = loadUploadedImages;
+      </script>
+  
+</head>
+
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="webimages/logo.png" alt="Snehakkoodu Logo" class="logo-image">
+            <div class="logo">
+                Snehakkoodu Charitable Trust
+                <div class="registration-number">Reg. No: 313/IV/2022</div>
+            </div>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+        <div class="hamburger-menu" id="hamburgerMenu">
+            <a href="#images-section" class="button"><i class="fas fa-images"></i> More Images</a>
+            <a href="#about" class="button"><i class="fas fa-info-circle"></i> About Us</a>
+            <a href="#donate" class="button"><i class="fas fa-hand-holding-heart"></i> Let's
+                Donate</a>
+        </div>
+    </header>
+
+    <div class="info-banner">
+        <span>H.O : കണ്ണൂർ, അലവിൽ | ബ്രാഞ്ച്: വയനാട്, ആലപ്പുഴ, കോട്ടയം.
+
+Ph. No: +91 88486 07274, 9567520310, 9947323215
+
+Email ID: snehakkoodcharitabletrust313@gmail.com |
+
+Reg. No: 313/IV/22</span>
+    </div>
+
+    <main class="container">
+        <section class="hero">
+            <h1>    Snehakkoodu Organisation Stands for the Needy Across Kerala</h1>
+
+            <div class="slideshow-container" id="slideshow">
+                <img src="webimages/kunjali.jpg"/800x600?text=Image+1" alt="Placeholder Image 1" class="slides show"
+                    width="800" height="600">
+                <img src="webimages/onakkodi.jpg"/800x600?text=Image+2" alt="Placeholder Image 2" class="slides"
+                    width="800" height="600">
+                <img src="webimages/jogi.jpg"/800x600?text=Image+3" alt="Placeholder Image 3" class="slides"
+                    width="800" height="600">
+            </div>
+
+            <!-- New Information Card -->
+            <div class="info-card">
+                <i class="fas fa-hand-holding-heart fa-2x" style="color: #27408B; margin-bottom: 1rem;"></i>
+                <p>ബഹുമാന്യ മിത്രമേ<br>നിരാശ്രയരായ അനാഥ ബാല്യങ്ങൾ, രോഗപീഢകളാൽ നിരാലംബരായിപ്പോയ സഹജീവികൾ, തെരുവിൽ
+                    ഉപേക്ഷിക്കപ്പെട്ടവർ, ജീവിത സായാഹ്നത്തിൽ ഒറ്റപ്പെട്ടുപോയവർ<br>എന്നിങ്ങനെ തീർത്തും കരുണ
+                    അർഹിക്കുന്നവരെ ഒരു അമ്മയുടെ ലാളനയായും, അച്ഛന്‍റെ സ്നേഹമായി, സഹോദരന്‍റെ, തണലായി സഹോദരിയുടെ കരുതലായി സ്നേഹക്കൂട് ചാരിറ്റബിൾ
+                    ട്രസ്റ്റ് അവർക്ക്
+                    സന്ത്വനമേകുന്നു.<br><br>നിരാലംബർക്ക്
+            
+                    താങ്ങും
+                    തണലുമായി
+                    ഉയർന്നു വരേണ്ടുന്ന ഈ മഹത് സംരംഭത്തിൻ്റെ മുൻപോട്ടുളള പ്രയാണത്തിന് താങ്കളാൽ കഴിയുന്ന വിലപ്പെട്ട സഹായം നൽകുന്നയിനോടൊപ്പം താങ്കളുമായി സൗഹൃദമുള്ള വ്യക്തികളുടെയും പ്രസ്ഥാനങ്ങളുടെയും സ്നേഹനിർഭരമായ ഇടപെടൽ കൂടി ഉണ്ടാകണമെന്ന് വിനീതമായി അഭ്യർത്ഥിക്കുന്നു
+                    .<br><br> എന്ന്
+                    ,   പ്രസീത അഴീക്കോട്</p>
+            </div>
+
+        </section>
+
+        <div class="content" id="about">
+            <div class="content-card">
+                <a href="" class="button"><i class="fas fa-info-circle"></i> About Us</a>
+                <div class="single-line-card">
+                    <img src="webimages/Praseetha.png"/80" alt="Chairperson Image">
+                    Chairperson
+                    <p>"ഹായ് ഞാൻ പ്രസീത അഴീക്കോട് പ്രമുഖ രാഷ്ട്രീയ സാമൂഹ്യ പ്രവർത്തകയായ ഞാനാണ് നമ്മുടെ
+                        സ്നേഹക്കൂട്
+                        ചാരിറ്റബിൾ ട്രസ്റ്റിന് നിങ്ങളിലൂടെ ജീവൻ പകർത്തുന്നത്."</p>
+                </div>
+                <div class="single-line-card">
+                    <img src="webimages/nishant.png"/80" alt="Director Image">
+                    Director
+                    <p>"Hi am Nishanth K. ഞാനാണ് നമ്മുടെ സ്നേഹിക്കൂടിൻ്റെ ഓഫീസ് ചുമതലകളുടെ മേൽനോട്ടക്കാരൻ"</p>
+                </div>
+                <div class="single-line-card">
+                    <img src="webimages/akhil.jpg"/80" alt="District Co-ordinater Image">
+                    District Co-ordinator
+                    <p>"ഹായ് എൻറെ പേര് അഖിൽ എം ഞാനാണ് ജില്ലകളിലെ സ്നേഹക്കൂടിന്റെ പ്രവർത്തനങ്ങളെ
+                        ഏകോപിപ്പിക്കുന്നത്."</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content" id="contact">
+            <div class="content-card">
+                <a href="" class="button"><i class="fas fa-envelope"></i> Contact
+                    Us</a>
+                <p>H.O : അലവിൽ, കണ്ണൂർ<br>
+                    ബ്രാഞ്ച്: വയനാട്, ആലപ്പുഴ, കോട്ടയം.<br>
+                    Ph. No: +91 88486 07274, 9567520310, 9947323215<br>
+                    Email ID: snehakkoodcharitabletrust313@gmail.com<br>
+                    Reg. No: 313/IV/2022</p>
+            </div>
+        </div>
+
+        <div class="content" id="donate">
+            <div class="content-card">
+                <a href="" class="button"><i class="fas fa-hand-holding-heart"></i>
+                    Let's
+                    Donate</a>
+                <p>അന്നദാനം മഹാദാനം ഇന്നത്തെ ധനസഹായം നിങ്ങളുടേതാകട്ടെ
+                    </p>
+                <img src="webimages/money.jpg"/chart?chs=200x200&cht=qr&chl="
+                    alt="QR Code for Donation Link" class="qr-code" width="200" height="200">
+            </div>
+        </div>
+
+        <section class="images-section" id="images-section">
+            <img src="webimages/2.jpg"/800x600?text=Community+1" alt="Community Image 1" width="800"
+                height="600">
+            <img src="webimages/3.jpg"/800x600?text=Community+2" alt="Community Image 2" width="800"
+                height="600">
+            <img src="webimages/4.jpg"/800x600?text=Community+3" alt="Community Image 3" width="800"
+                height="600">
+<img src="webimages/5.jpg"/800x600?text=Community+4" alt="Community Image 3" width="800"
+                height="600">
+<img src="webimages/6.jpg"/800x600?text=Community+5" alt="Community Image 3" width="800"
+                height="600">
+
+<img src="webimages/7.jpg"/800x600?text=Community+6" alt="Community Image 3" width="800"
+                height="600">
+<img src="webimages/8.jpg"/800x600?text=Community+7" alt="Community Image 3" width="800"
+                height="600">
+<img src="webimages/9.jpg"/800x600?text=Community+8" alt="Community Image 3" width="800"
+                height="600">
+<img src="webimages/10.jpg"/800x600?text=Community+9" alt="Community Image 3" width="800"
+                height="600">
+<img src="webimages/11.jpg"/800x600?text=Community+10" alt="Community Image 3" width="800"
+                height="600">
+<img src="webimages/12.jpg"/800x600?text=Community+10" alt="Community Image 3" width="800"
+                height="600">
+<img src="webimages/13.jpg"/800x600?text=Community+10" alt="Community Image 3" width="800"
+                height="600">
+
+
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2022 Snehakkoodu Charitable Trust. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            const slides = document.querySelectorAll('.slides');
+            for (i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('show');
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            slides[slideIndex - 1].classList.add('show');
+            setTimeout(showSlides, 4000);
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('hamburgerMenu');
+            menu.classList.toggle('active');
+        }
+    </script>
+</body>
+
+</html>    
+    </script>
+</body>
+
+</html>
+    </script>
+</body>
+
+</html>
+    </script>
+</body>
+
+</html>    </script>
+</body>
+
+</html>
+
+</html>
